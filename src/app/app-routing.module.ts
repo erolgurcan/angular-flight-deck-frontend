@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { InfopageComponent } from './infopage/infopage.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,12 @@ const routes: Routes = [
   {
     component: InfopageComponent,
     path: 'info'
+  },
+  {
+    component: DashboardComponent,
+    path: 'dashboard'
   }
+
 ];
 
 @NgModule({

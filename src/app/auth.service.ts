@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs';
+import { Apiservice } from './api.service';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
-  constructor() { }
+  constructor( private apiService: Apiservice, private router: Router) { }
 
 
   login (username: string, password: string){
 
-    const pass = "123";
-
-    return password == pass?  true:  false;
+    console.log(username, password)
+      this.apiService.login(username, password).subscribe(  () => {this.router.navigate( ['/dashboard'] )}  );
+      
 
   }
 }

@@ -72,7 +72,7 @@ body {
     color: darkgrey;
   }
   
-  .login-box button[type="submit"] {
+  .login-box button {
     margin-top: 40px;
     margin: auto;
     border: none;
@@ -86,11 +86,20 @@ body {
     transition: 0.5s;
   }
   
-  .login-box button[type="submit"]:hover {
+  .login-box button:hover {
     background: #005d6b;
+    flex-shrink: 3;
   }
   
   .login-background {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../../assets/backgroup-images/landing-page-background.jpg.jpg");
     background-position: center ;
+  }
+  
+  .btn-container{
+    text-align: center;
+    display: flex; 
+    flex-wrap:wrap; 
+    flex-direction: column; 
+    padding: 2%; 
   }

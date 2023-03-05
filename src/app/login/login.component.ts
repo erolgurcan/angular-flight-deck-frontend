@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { ApiService } from '../api-service.service';
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import { AuthService } from '../auth.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -10,11 +11,23 @@ import {NgForm} from "@angular/forms";
 })
 export class LoginComponent {
 
-    constructor(private apiService: ApiService, private router: Router) {}
+    userName :string = "";
+    password : string = "";
+  
 
-    submitForm( ){
-      console.log("login component")
-      this.apiService.login();
+    constructor( private authService: AuthService ) {}
+
+    submitForm( submitNGForm: NgForm ){
+
+      if(submitNGForm.touched == false) return;
+      if(submitNGForm.valid == false) return;
+
+      
+        console.log( this.password )
+        console.log(this.userName)
+
+        this.authService.login(this.userName, this.password);
+        
     }
 
 }
