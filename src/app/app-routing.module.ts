@@ -4,7 +4,7 @@ import { InfopageComponent } from './infopage/infopage.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { ChartComponent } from './chart/chart.component';
 
 const routes: Routes = [
   {
@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     component: DashboardComponent,
     path: 'dashboard'
+  },
+  {
+    component: ChartComponent,
+    path: 'chart'
   }
 
 ];

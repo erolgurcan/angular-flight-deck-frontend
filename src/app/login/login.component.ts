@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from "@angular/forms";
 import { AuthService } from '../auth.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,25 +10,29 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-    userName :string = "";
-    password : string = "";
-  
+  userName: string = "";
+  password: string = "";
 
-    constructor( private authService: AuthService ) {}
+  ngOnInit() {
 
-    submitForm( submitNGForm: NgForm ){
+  }
 
-      if(submitNGForm.touched == false) return;
-      if(submitNGForm.valid == false) return;
+  constructor(private authService: AuthService, private spinner: NgxSpinnerService, private router: Router) { }
 
-      
-        console.log( this.password )
-        console.log(this.userName)
+  submitForm(submitNGForm: NgForm) {
+    this.spinner.show();
+    if (submitNGForm.touched == false) return;
+    if (submitNGForm.valid == false) return;
 
-        this.authService.login(this.userName, this.password);
-        
-    }
+    console.log(this.password)
+    console.log(this.userName)
+
+    this.authService.login(this.userName, this.password).subscribe(() => { 
+      this.spinner.hide();
+      this.router.navigate(['/dashboard']) });
+
+  }
 
 }
