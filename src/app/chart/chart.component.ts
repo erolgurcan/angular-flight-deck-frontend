@@ -35,16 +35,12 @@ export class ChartComponent implements OnInit {
 
   }
 
-
-
-
   ngOnInit(): void {
-
 
     setInterval(() => {
       this.apiService.getLatestData().subscribe((data) => {
-
-        if (this.dataset[0].series.length > 10) {
+        console.log(data.result)
+        if (this.dataset[0].series.length > 50) {
           this.dataset[0].series.shift();
           this.dataset[0].series.push(
             {
@@ -52,9 +48,8 @@ export class ChartComponent implements OnInit {
               "name": String(data.result.loggingTime),
             },
           );
-            console.log("1", this.dataset[0].series)
+
         } else {
-          console.log("2", this.dataset[0].series)
           this.dataset[0].series.push(
             
             {
@@ -69,7 +64,7 @@ export class ChartComponent implements OnInit {
         this.dataset = [...this.dataset];
 
       })
-    }, 1000)
+    }, 5000)
 
   }
 
