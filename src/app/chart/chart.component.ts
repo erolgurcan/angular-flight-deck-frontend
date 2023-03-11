@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Apiservice } from '../api.service';
+import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-chart',
@@ -8,36 +9,61 @@ import { Apiservice } from '../api.service';
 })
 export class ChartComponent implements OnInit {
 
-
-  dataset = [
-    {
-      "name": "Kuwait",
-      "series": [
-        {
-          "value": 0,
-          "name": "2016-09-18T02:44:32.162Z"
-        },
-      ]
-    },
-  ]
-
-
-
-  colorScheme = {
-    domain: ['#08DDC1', '#FFDC1B', '#FF5E3A']
-  };
+  constructor(private apiService: Apiservice) { }
 
   customColors = (value: any) => {
     return "#ff0000";
   }
 
-  constructor(private apiService: Apiservice) {
+  public legendPosition: LegendPosition = LegendPosition.Right;
 
+  dataset = [
+    {
+      "name": "Altitude",
+      "series": [
+        {
+          "value": 0,
+          "name": ""
+        },
+      ]
+    },
+  ]
+
+  single = [
+    {
+      "name": "Germany",
+      "value": 8940000
+    },
+    {
+      "name": "USA",
+      "value": 5000000
+    },
+    {
+      "name": "France",
+      "value": 7200000
+    }
+  ];
+  
+
+  toggleLiveData = false;
+  internalID: any
+
+  onLive(): void {
+    console.log("button clicked")
+    if (this.toggleLiveData == false) {
+      console.log(this.toggleLiveData)
+      this.toggleLiveData = true;
+      this.getLiveData();
+    } else {
+      this.toggleLiveData = false;
+      clearInterval(this.internalID);
+    }
   }
 
-  ngOnInit(): void {
+  getLiveData(): void {
 
-    setInterval(() => {
+    this.dataset[0].series = [];
+    this.internalID = setInterval(() => {
       this.apiService.getLatestData().subscribe((data) => {
         console.log(data.result)
         if (this.dataset[0].series.length > 50) {
@@ -51,20 +77,22 @@ export class ChartComponent implements OnInit {
 
         } else {
           this.dataset[0].series.push(
-            
             {
               "value": Number(data.result.altitude),
               "name": String(data.result.loggingTime),
             },
-
           );
         }
-
-
         this.dataset = [...this.dataset];
-
       })
     }, 5000)
+  }
+
+
+
+  ngOnInit(): void {
+
+
 
   }
 

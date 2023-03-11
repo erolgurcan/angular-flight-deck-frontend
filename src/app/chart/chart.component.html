@@ -1,11 +1,23 @@
-<ngx-charts-line-chart
-  [results]="dataset"
-  [view]="[600,600]"
-  [xAxis]="true"
-  [yAxis]="true"
-  [showGridLines]="true"
-  [scheme]="'flame'"
-  [customColors]="customColors"
-  >
-  
-</ngx-charts-line-chart>
+<div>
+  <div class="mt-2">
+    <button (click)="onLive()" type="button" class="btn btn-primary m-2 p-2">Live Data</button>
+    <button class="btn btn-secondary m-2 p-2">Historic Data</button>
+    <h4 class="text-center text text-danger " [ngClass]="{
+
+      'blink': toggleLiveData
+
+    }"> <strong>{{toggleLiveData == true ? " ● Live data enabled":
+        "Live data disabled"}}</strong>
+    </h4>
+  </div>
+  <div class="card text-center mb-4"> <ngx-charts-line-chart [results]="dataset" [view]="[800,300]" [xAxis]="true"
+      [yAxis]="true" [showGridLines]="true" [scheme]="'flame'" [customColors]="customColors" [legend]='true'
+      [autoScale]="true" [legendPosition]="legendPosition" [rangeFillOpacity]="0.4">
+
+    </ngx-charts-line-chart></div>
+  <div class="card mt-4">
+    <ngx-charts-bar-vertical [view]="[400,300]" [results]="single" [gradient]="true" [legend]="true">
+    </ngx-charts-bar-vertical>
+  </div>
+
+</div>

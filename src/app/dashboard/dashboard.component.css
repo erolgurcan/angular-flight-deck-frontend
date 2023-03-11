@@ -1,4 +1,6 @@
-
+app-root{
+  background-color: rgb(30, 30, 39);
+}
 
 .map-container {
     width: 100%;

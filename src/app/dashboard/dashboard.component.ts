@@ -38,16 +38,16 @@ export class DashboardComponent implements AfterViewInit {
 
     marker.addTo(this.map);
 
-    setInterval(() => {
-      this.apiService
-        .getLatestData()
-        .subscribe((response) =>
-          marker.setLatLng([
-            response.result.latitude,
-            response.result.longitude,
-          ])
-        );
-    }, 10000);
+    // setInterval(() => {
+    //   this.apiService
+    //     .getLatestData()
+    //     .subscribe((response) =>
+    //       marker.setLatLng([
+    //         response.result.latitude,
+    //         response.result.longitude,
+    //       ])
+    //     );
+    // }, 10000);
   }
 
   constructor(private apiService: Apiservice) {}
